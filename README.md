@@ -20,11 +20,11 @@ localhostForwarding=true
 В нем указан хост laravel8.test, который следует прописать в hosts, например: `127.0.0.1 laravel8.test`  
 
 Следует указать правильные пути к каталогу www и mysql-data в файле (см. раздел volumes):
-/feedbackform/docker-latest/docker-compose.yml  
+`/feedbackform/docker-latest/docker-compose.yml`  
 
 Там же следует указать пароль пользователя `root` для `mysql` в переменной `MYSQL_ROOT_PASSWORD`.  
   
-Инструкцию для установки docker под Linux я приводить тут не буду. Считаю лишним.
+Инструкцию по установке docker под Linux я приводить тут не буду. Считаю лишним.
 
 ## Запуск
 Переходим в /feedbackform/docker-latest/  
