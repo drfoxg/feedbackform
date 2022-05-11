@@ -31,7 +31,7 @@ localhostForwarding=true
 `sudo docker-compose up -d`
 
 ## Сборка приложения
-Открываем phpMyAdmin по адресу localhost:8080
+Открываем phpMyAdmin по адресу localhost:8080  
 Настраиваем подключение в файле:  
 `/var/www/laravel8/.env`
 
