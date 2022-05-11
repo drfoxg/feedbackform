@@ -2,11 +2,11 @@
 Тестовое задание
 ## Установка
 Приложение тестировалось под Docker.
-Хостом для Docker служил Fedora 34 Server Edition или Ubuntu 20.04 через WSL под Windows 10  
+Хостом для Docker служил Fedora 34 Server Edition или Ubuntu 20.04 через WSL под Windows 10.  
 
-Подготовка к установке Docker for Windows  
-[Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)  
-[Docker for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe) должен быть установлен и интегрирован с WSL 2 [Ubuntu 20.04 MS Store](https://www.microsoft.com/en-us/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
+Подготовка к установке Docker for Windows:  
+[Windows Subsystem for Linux Installation Guide for Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10).  
+[Docker for Windows](https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe) должен быть установлен и интегрирован с WSL 2 [Ubuntu 20.04 MS Store](https://www.microsoft.com/en-us/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab).
 
 .wslconfig следует разместить в домашнем каталоге пользователя Windows и скорректировать доступный объем памяти для WSL, пример конфига на 2 GB, возможно нужна перезагрузка Windows:  
 ```
