@@ -1,7 +1,7 @@
 # Форма обратной связи на Laravel + Vue
 Тестовое задание
 ## Установка
-Приложение тестировалось под Docker
+Приложение тестировалось под Docker.
 Хостом для Docker служил Fedora 34 Server Edition или Ubuntu 20.04 через WSL под Windows 10  
 
 Подготовка к установке Docker for Windows  
