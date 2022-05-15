@@ -53,6 +53,8 @@ CREATE USER 'user'@'%' IDENTIFIED BY 'password';
 ALTER USER 'user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
 ```
   
+Импортируем через phpMyAdmin docker-laravel8/sql-backups/countries.sql, это справочник телефонных кодов.  
+  
 Открываем консоль сервера:  
 `sudo docker exec -it docker-latest_laravel8_1 bash`
   
