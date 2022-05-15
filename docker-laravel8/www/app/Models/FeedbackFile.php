@@ -11,27 +11,27 @@ class FeedbackFile extends Model
 {
     use HasFactory;
 
-    public static function create($data) {
+    public static function create($data)
+    {
 
         $writeToFile = json_encode($data);
 
-        $path = $data['username'].$data['countryId'].$data['phone'];
+        $path = $data['username'] . $data['countryId'] . $data['phone'];
         try {
             if (Storage::disk('local')->exists($path)) {
-                $entity =  Storage::disk('local')->get($path);
+                $entity = Storage::disk('local')->get($path);
                 $entity = json_decode($entity, true);
 
-                $messageNew = FeedbackFile::addMessage($entity['message'], $data['message']);
-                $entity['message'] = $messageNew;
+                $messages = FeedbackFile::addMessage($entity['message'], $data['message']);
+                $entity['message'] = $messages;
 
-                $writeToFile =json_encode($entity);
+                $writeToFile = json_encode($entity);
             }
 
             Storage::disk('local')->put($path, $writeToFile);
-        }
-        catch (FileNotFoundException $e) {
+        } catch (FileNotFoundException $e) {
             $status = ['writetofile' => false,
-                       'error' => $e->getMessage()];
+                'error' => $e->getMessage()];
 
             return json_encode($status);
         }
@@ -39,20 +39,21 @@ class FeedbackFile extends Model
         return $writeToFile;
     }
 
-    private static function addMessage($message, $data_to_add):array {
-        $messageArr = [];
+    private static function addMessage($oldMessage, string $newMessage): array
+    {
+        $messages = [];
 
-        if (is_string($message)) {
-            array_push($messageArr, $message);
-            array_push($messageArr, $data_to_add);
+        if (is_string($oldMessage)) {
+            array_push($messages, $oldMessage);
+            array_push($messages, $newMessage);
         }
 
-        if (is_array($message)) {
-            array_push($message, $data_to_add);
+        if (is_array($oldMessage)) {
+            array_push($oldMessage, $newMessage);
 
-            $messageArr = $message;
+            $messages = $oldMessage;
         }
 
-        return $messageArr;
+        return $messages;
     }
 }

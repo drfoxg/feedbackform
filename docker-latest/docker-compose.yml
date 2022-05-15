@@ -9,7 +9,7 @@ services:
     image: mysql:latest
     # Data folder
     volumes:
-      - /home/rustmod/docker/docker-laravel8/mysql-data/:/var/lib/mysql
+      - /home/rustmod/feedbackform/docker-laravel8/mysql-data/:/var/lib/mysql
     # Connect to "drfoxg-net" network, as defined below
     networks:
       - drfoxg-net
@@ -41,13 +41,13 @@ services:
     build:
       context: ../docker-laravel8
     volumes:
-      - /home/rustmod/docker/docker-laravel8/www/:/var/www/laravel8
+      - /home/rustmod/feedbackform/docker-laravel8/www/:/var/www/laravel8
     networks:
       - drfoxg-net
     ports:
       - "80:80"
     environment:
-       XDEBUG_CONFIG: remote_host=192.168.100.33
+       XDEBUG_CONFIG: remote_host=192.168.1.90
 
 # Define networks
 networks:
