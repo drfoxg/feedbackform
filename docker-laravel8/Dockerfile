@@ -10,7 +10,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Moscow
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN apt-get update && apt-get install -y locales
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/*
 RUN sed -i -e \
   's/# ru_RU.UTF-8 UTF-8/ru_RU.UTF-8 UTF-8/' /etc/locale.gen \
    && locale-gen
@@ -21,7 +21,7 @@ ENV LC_LANG ru_RU.UTF-8
 ENV LC_ALL ru_RU.UTF-8
 
 # apache2 and utils
-RUN apt-get install -y apache2 curl wget git software-properties-common mc net-tools iputils-ping apt-utils
+RUN apt-get update && apt-get install -y apache2 curl wget git software-properties-common mc net-tools iputils-ping apt-utils && rm -rf /var/lib/apt/lists/*
 
 # php 7.3 and node.js 16.x
 RUN add-apt-repository ppa:ondrej/php && \
@@ -33,7 +33,8 @@ RUN add-apt-repository ppa:ondrej/php && \
     libzip-dev \
     libxml2-dev && \
     curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN npm install npm -g
 
@@ -48,7 +49,9 @@ RUN sed -i 's/display_startup_errors.*=.*Off/display_startup_errors = On/' /etc/
 RUN sed -i 's/;\s*error_log\s*=\s*php_errors.log/error_log = \/var\/log\/php_errors.log/' /etc/php/7.3/apache2/php.ini
 
 # xdebug
-RUN apt-get install php7.3-xdebug
+RUN apt-get update && \
+    apt-get install php7.3-xdebug && \
+    rm -rf /var/lib/apt/lists/*
 #RUN echo 'zend_extension=xdebug\n' >> /etc/php/7.3/apache2/php.ini
 RUN echo 'zend_extension=/usr/lib/php/20180731/xdebug.so\n' >> /etc/php/7.3/cli/php.ini
 RUN echo 'zend_extension=/usr/lib/php/20180731/xdebug.so\n' >> /etc/php/7.3/apache2/php.ini
