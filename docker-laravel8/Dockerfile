@@ -91,9 +91,21 @@ RUN mkdir -p -m 775 /var/log/apache2/laravel8 \
     && chown -R 33:33 /var/log/apache2/laravel8 \
     &&  echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+COPY .htaccess /var/www/html
+COPY mpm.conf /etc/apache2/conf-available
 COPY laravel8.conf /etc/apache2/sites-available
+
+RUN a2disconf other-vhosts-access-log
+#RUN a2enconf mpm
 RUN a2enmod rewrite
 RUN a2ensite laravel8
+RUN a2dissite 000-default
+
+RUN sed -i 's/<VirtualHost\ \*:80>/<VirtualHost\ 62.109.24.91:80>/' /etc/apache2/sites-available/000-default.conf
+RUN sed -i '/DocumentRoot/ a <Directory\ \/var\/www\/html>\n AllowOverride\ All \n<\/Directory>' /etc/apache2/sites-available/000-default.conf
+
+RUN a2ensite 000-default
 RUN service apache2 restart
 
-CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
+#CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
+CMD ["apachectl", "-DFOREGROUND"]
