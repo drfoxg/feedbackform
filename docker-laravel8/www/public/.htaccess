@@ -1,3 +1,8 @@
+<RequireAll>
+    Require all granted
+    Require not ip 91.222.19.95
+</RequireAll>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
