@@ -42,6 +42,7 @@ services:
       context: ../docker-laravel8
     volumes:
       - /home/rustmod/feedbackform/docker-laravel8/www/:/var/www/laravel8
+      - /home/rustmod/feedbackform/docker-laravel8/www1/:/var/www/crossword
     networks:
       - drfoxg-net
     ports:

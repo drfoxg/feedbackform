@@ -81,7 +81,9 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # apache vhost
 RUN cd /var/www \
    && mkdir -p -m 775 /var/www/laravel8 \
-   && chown -R 1000:33 /var/www/laravel8
+   && chown -R 1000:33 /var/www/laravel8 \
+   && mkdir -p -m 775 /var/www/crossword \
+   && chown -R 1000:33 /var/www/crossword
 
 ENV APACHE_RUN_USER=www-data
 ENV APACHE_RUN_GROUP=www-data
@@ -92,16 +94,20 @@ ENV APACHE_RUN_DIR=/var/run/apache2
 
 RUN mkdir -p -m 775 /var/log/apache2/laravel8 \
     && chown -R 33:33 /var/log/apache2/laravel8 \
-    &&  echo "ServerName localhost" >> /etc/apache2/apache2.conf
+    && mkdir -p -m 775 /var/log/apache2/crossword \
+    && chown -R 33:33 /var/log/apache2/crossword \
+    && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 COPY .htaccess /var/www/html
 COPY mpm.conf /etc/apache2/conf-available
 COPY laravel8.conf /etc/apache2/sites-available
+COPY crossword.conf /etc/apache2/sites-available
 
 RUN a2disconf other-vhosts-access-log
 #RUN a2enconf mpm
 RUN a2enmod rewrite
 RUN a2ensite laravel8
+RUN a2ensite crossword
 RUN a2dissite 000-default
 
 RUN sed -i 's/<VirtualHost\ \*:80>/<VirtualHost\ 62.109.24.91:80>/' /etc/apache2/sites-available/000-default.conf
