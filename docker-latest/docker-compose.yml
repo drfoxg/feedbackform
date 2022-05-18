@@ -4,7 +4,7 @@ version: "3.7"
 # Define services/containers
 services:
   # MySQL container
-  mysql:
+  mysqllaravel8:
     # Use mysql:latest image
     image: mysql:latest
     # Data folder
@@ -30,10 +30,10 @@ services:
       - "8080:80"
     # Pass a list of environment variables to the container
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: mysqllaravel8
     # Wait for "mysql" container to start first
     depends_on:
-      - mysql
+      - mysqllaravel8
       
   # laravel 8 + vue 2 container
   laravel8:
