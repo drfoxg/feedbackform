@@ -104,7 +104,7 @@ COPY laravel8.conf /etc/apache2/sites-available
 COPY crossword.conf /etc/apache2/sites-available
 
 RUN a2disconf other-vhosts-access-log
-#RUN a2enconf mpm
+RUN a2enconf mpm
 RUN a2enmod rewrite
 RUN a2ensite laravel8
 RUN a2ensite crossword
@@ -116,5 +116,4 @@ RUN sed -i '/DocumentRoot/ a <Directory\ \/var\/www\/html>\n AllowOverride\ All 
 RUN a2ensite 000-default
 RUN service apache2 restart
 
-#CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
 CMD ["apachectl", "-DFOREGROUND"]

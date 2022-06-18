@@ -15,7 +15,7 @@ services:
       - drfoxg-net
     # Pass a list of environment variables to the container
     environment:
-      MYSQL_ROOT_PASSWORD: go7856go
+      MYSQL_ROOT_PASSWORD: secret
 
   # phpMyAdmin container
   phpmyadmin:
